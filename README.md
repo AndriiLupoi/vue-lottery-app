@@ -1,4 +1,4 @@
-# vue-lottery-app
+# lottery-app-lab6
 
 ## Project setup
 ```

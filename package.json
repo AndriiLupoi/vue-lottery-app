@@ -1,18 +1,21 @@
 {
-  "name": "vue-lottery-app",
+  "name": "lottery-app-lab6",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "format": "npx prettier --write src"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
-    "vue": "^3.2.13",
-    "vue-class-component": "^8.0.0-0"
+    "vue": "^3.2.13"
   },
   "devDependencies": {
+    "@types/webpack-env": "^1.18.5",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
