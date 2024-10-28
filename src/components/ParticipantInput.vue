@@ -6,6 +6,7 @@
       @input="onInput"
       :type="inputType"
       class="form-control"
+      :placeholder="placeholder"
       :class="{ 'is-invalid': hasError }"
       required
     />
@@ -27,6 +28,7 @@ export default defineComponent({
     modelValue: String,
     errorMessage: String,
     validate: Function,
+    placeholder: String,
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
