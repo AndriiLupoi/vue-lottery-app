@@ -1,3 +1,6 @@
+import { Participant } from "@/models/Participant";
+import MyStorage from "@/misc/MyStorage";
+
 export class Validator {
   static validateName(name: string): string {
     if (!name || name.trim() === "") {
@@ -19,13 +22,21 @@ export class Validator {
     return "";
   }
 
-  static validateEmail(email: string): string {
+  static validateEmail(email: string, isUpdate: boolean): string {
     if (!email) {
       return "Email is required.";
     }
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       return "Invalid email format.";
+    }
+    if (!isUpdate) {
+      const participants: Participant[] = MyStorage.getParticipants();
+      for (const participant of participants) {
+        if (participant.email === email) {
+          return "email already exists";
+        }
+      }
     }
     return "";
   }
