@@ -1,3 +1,41 @@
+<template>
+  <div class="card">
+    <h3>REGISTER FORM</h3>
+    <p>Please fill in all the fields.</p>
+    <form @submit.prevent="registerParticipant" novalidate>
+      <ParticipantInput
+        label="Name"
+        v-model="localParticipant.name"
+        :errorMessage="nameError"
+        :validate="validateName"
+      />
+      <ParticipantInput
+        label="Date of Birth"
+        inputType="date"
+        v-model="localParticipant.dateOfBirth"
+        :max="today"
+        :errorMessage="dateError"
+        :validate="validateDateOfBirth"
+      />
+      <ParticipantInput
+        label="Email"
+        inputType="email"
+        v-model="localParticipant.email"
+        :errorMessage="emailError"
+        :validate="validateEmail"
+      />
+      <ParticipantInput
+        label="Phone number"
+        inputType="tel"
+        v-model="localParticipant.phoneNumber"
+        :errorMessage="phoneError"
+        :validate="validatePhoneNumber"
+      />
+      <ActionButton text="Save" type="submit" :disabled="hasValidationError" />
+    </form>
+  </div>
+</template>
+
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
 import { Validator } from "@/misc/Validator";
@@ -28,23 +66,19 @@ export default defineComponent({
     const dateError = ref<string>("");
     const emailError = ref<string>("");
     const phoneError = ref<string>("");
-
-    // Додати реактивну змінну для перевірки наявності помилок
-    const hasValidationErrors = ref<boolean>(false);
+    const hasValidationError = ref(false);
 
     watch(localParticipant, (newVal) => {
       emit("update:newParticipant", newVal);
     });
-
-    // Спостерігати за помилками та автоматично оновлювати hasValidationErrors
     watch([nameError, dateError, emailError, phoneError], () => {
-      hasValidationErrors.value =
-        !!nameError.value ||
-        !!dateError.value ||
-        !!emailError.value ||
-        !!phoneError.value;
+      hasValidationError.value = !!(
+        nameError.value ||
+        dateError.value ||
+        emailError.value ||
+        phoneError.value
+      );
     });
-
     const validateName = () => {
       nameError.value = Validator.validateName(localParticipant.value.name);
     };
@@ -76,9 +110,13 @@ export default defineComponent({
       validateEmail();
       validatePhoneNumber();
 
-      if (!hasValidationErrors.value) {
+      if (
+        !nameError.value &&
+        !dateError.value &&
+        !emailError.value &&
+        !phoneError.value
+      ) {
         emit("register-participant", localParticipant.value); // Emit localParticipant
-
         localParticipant.value = {
           name: "",
           dateOfBirth: "",
@@ -94,12 +132,12 @@ export default defineComponent({
       dateError,
       emailError,
       phoneError,
-      hasValidationErrors, // Повертаємо змінну
       registerParticipant,
       validateName,
       validateDateOfBirth,
       validateEmail,
       validatePhoneNumber,
+      hasValidationError,
     };
   },
 });
