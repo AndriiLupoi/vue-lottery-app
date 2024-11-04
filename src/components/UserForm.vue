@@ -29,7 +29,7 @@ const emit = defineEmits({
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email) &&
       user.password &&
       user.avatar &&
-      /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/.test(
+      /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$/.test(
         user.avatar
       )
     )
@@ -66,7 +66,7 @@ const avatarIsValid = computed(() => {
   }
   return (
     !!user.value.avatar &&
-    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/.test(
+    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$/.test(
       user.value.avatar
     )
   )
@@ -118,6 +118,7 @@ const onSubmit = () => {
           placeholder="Enter user name"
           v-model="user.name"
           @blur="touchedFields.name"
+          type="text"
         ></VueInput>
         <div class="invalid-feedback">Username is required.</div>
       </div>
@@ -143,6 +144,7 @@ const onSubmit = () => {
           placeholder="Enter email"
           v-model="user.email"
           @blur="touchedFields.email"
+          type="email"
         ></VueInput>
         <div class="invalid-feedback">Email is required and should be in valid format.</div>
       </div>
@@ -155,6 +157,7 @@ const onSubmit = () => {
           placeholder="Choose role"
           v-model="user.role"
           @blur="touchedFields.role"
+          type="text"
         ></VueInput>
         <div class="invalid-feedback">
           Role is required and should be either 'admin' or 'customer'
@@ -169,6 +172,7 @@ const onSubmit = () => {
           v-model="user.avatar"
           placeholder="Enter avatar URL"
           @blur="touchedFields.avatar"
+          type="url"
         ></VueInput>
         <div class="invalid-feedback">Avatar is required and should be a valid url.</div>
       </div>

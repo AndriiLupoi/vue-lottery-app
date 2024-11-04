@@ -20,6 +20,7 @@ const handleSearch = (query: string) => {
       id="search-query"
       :is-valid="null"
       placeholder="Search by name..."
+      type="text"
     ></VueInput>
     <VueButton
       @onClick="
