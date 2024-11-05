@@ -3,7 +3,7 @@ import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { AuthService } from '@/helpers/auth-service'
 import { useRouter } from 'vue-router'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 const router = useRouter()
 const loginMessage = ref<string>('')

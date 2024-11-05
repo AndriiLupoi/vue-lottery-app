@@ -1,34 +1,28 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import {computed, ref, watch} from "vue";
 
-const props = defineProps({ isOpen: Boolean, id: String })
-const emit = defineEmits(['close'])
-const closeModal = () => emit('close')
+const props = defineProps({isOpen: Boolean, id: String});
+const emit = defineEmits(['close']);
+const closeModal = () => emit('close');
 
-const button = ref<HTMLButtonElement>()
+const button = ref<HTMLButtonElement>();
 
 watch(
-  () => props.isOpen,
-  (_) => {
-    button.value?.click()
-  },
-  { immediate: true }
-)
+    () => props.isOpen,
+    (_) => {
+      button.value?.click();
+    },
+    {immediate: true}
+);
 
 const modalId = computed(() => {
-  return '#' + props.id
-})
+  return '#' + props.id;
+});
 </script>
 
 <template>
-  <button
-    class="d-none"
-    ref="button"
-    id="hidden-btn"
-    type="button"
-    data-bs-toggle="modal"
-    :data-bs-target="modalId"
-  >
+  <button class="d-none" ref="button" id="hidden-btn" type="button" data-bs-toggle="modal"
+          :data-bs-target="modalId">
     Update
   </button>
 
@@ -51,4 +45,6 @@ const modalId = computed(() => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

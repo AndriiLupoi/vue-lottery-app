@@ -2,7 +2,7 @@
 import type { User } from '@/models/user'
 import { computed, ref, watch } from 'vue'
 import VueInput from '@/components/helper components/VueInput.vue'
-import SearchBar from '@/components/helper components/SearchBar.vue'
+import SearchBar from '@/components/SearchBar.vue'
 import VueModal from '@/components/helper components/VueModal.vue'
 
 const props = defineProps<{
@@ -38,14 +38,14 @@ const emit = defineEmits({
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email) &&
       user.password &&
       user.avatar &&
-      /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$/.test(
+      /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/.test(
         user.avatar
       )
     )
   }
 })
 
-const userToDelete = ref<User>()
+const userToDelete = ref<User | null>(null)
 
 const sortedByNameAsc = ref(false)
 const sortedByEmailAsc = ref(false)
@@ -145,7 +145,7 @@ const avatarIsValid = computed(() => {
   }
   return (
     !!userToUpdate.value.avatar &&
-    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$/.test(
+    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/.test(
       userToUpdate.value.avatar
     )
   )
@@ -262,19 +262,19 @@ function clearTouchedFields() {
       <template #footer>
         <button
           type="button"
-          @click="() => {
-            if (userToDelete) {
-              $emit('deleteUser', userToDelete);
-            } else {
-              console.error('User to delete is undefined');
+          @click="
+            () => {
+              if (userToDelete) {
+                // Перевірка на null
+                $emit('deleteUser', userToDelete)
+                closeDeleteModal()
+              }
             }
-            closeDeleteModal();
-          }"
+          "
           class="btn btn-primary"
         >
           Yes
         </button>
-
       </template>
     </VueModal>
 

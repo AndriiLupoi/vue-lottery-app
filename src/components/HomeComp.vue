@@ -1,9 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 
 <template>
   <div class="wrapper">
     <h1>Home Page</h1>
-    <hr class="line" />
+    <hr class="line">
     <p>Play the lottery without wasting your money!</p>
   </div>
 </template>

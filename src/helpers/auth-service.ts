@@ -26,15 +26,10 @@ export abstract class AuthService {
                 success: true,
                 errorMessage: ''
             }
-        } catch (err) {
-            let errorMessage = 'An unknown error occurred';
-            if (err instanceof Error) {
-                errorMessage = err.message;
-            }
-        
+        } catch (err){
             return {
                 success: false,
-                errorMessage
+                errorMessage: err.message
             };
         }
     }

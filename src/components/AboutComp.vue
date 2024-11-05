@@ -1,10 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 
 <template>
   <div class="wrapper">
     <h1>About page</h1>
-    <hr class="line" />
-    <p>My name is Ivan</p>
+    <hr class="line">
+    <p>My name is Andrii</p>
   </div>
 </template>
 
